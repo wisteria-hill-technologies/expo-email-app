@@ -6,5 +6,9 @@ This is a demo app to demonstrate my issue.
 
 Tested with Android device with Expo.
 
+Published here:
+https://expo.io/@nfabacus/expo-email-app
+
+
 
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).

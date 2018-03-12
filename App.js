@@ -12,8 +12,8 @@ export default class App extends React.Component {
 
   writeHTML=()=>{
     FileSystem.writeAsStringAsync(`${FileSystem.documentDirectory}myattachments/myhtml`, "<html>Hello</html>").then(result=>{
-      FileSystem.readAsStringAsync(`${FileSystem.documentDirectory}myattachments/myhtml`).then(result=>{
-        console.log("readAsStringAsync response data>>>", result)
+      FileSystem.readAsStringAsync(`${FileSystem.documentDirectory}myattachments/myhtml`).then(result2=>{
+        console.log("readAsStringAsync response data >>", result2)
       })
       
     })
