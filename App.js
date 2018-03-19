@@ -1,18 +1,18 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Share } from 'react-native'
 import { MailComposer, FileSystem } from 'expo'
 
 export default class App extends React.Component {
 
   componentDidMount() {
-    FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + `myattachments`).catch(e => {
-      console.log(e, 'Directory exists');
-    });
+    FileSystem.makeDirectoryAsync(FileSystem.cacheDirectory + `myattachments`).catch(e => {
+      console.log(e, 'Directory exists')
+    })
   }
 
   writeHTML=()=>{
-    FileSystem.writeAsStringAsync(`${FileSystem.documentDirectory}myattachments/myhtml`, "<html>Hello</html>").then(result=>{
-      FileSystem.readAsStringAsync(`${FileSystem.documentDirectory}myattachments/myhtml`).then(result2=>{
+    FileSystem.writeAsStringAsync(`${FileSystem.cacheDirectory}myattachments/myhtml.html`, "<html><h1>Hello, World!</h1><p>Html attachment works with Expo's mail composer!</p></html>").then(result=>{
+      FileSystem.readAsStringAsync(`${FileSystem.cacheDirectory}myattachments/myhtml.html`).then(result2=>{
         console.log("readAsStringAsync response data >>", result2)
       })
       
@@ -23,9 +23,24 @@ export default class App extends React.Component {
   openEmail=()=>{
     MailComposer.composeAsync({
       recipient:"",
-      subject:"attachment is not working",
+      subject:"html attachment is working",
       body:"Hi! Here is the attachment...",
-      attachments: [`${FileSystem.documentDirectory}myattachments/myhtml`]
+      attachments: [`${FileSystem.cacheDirectory}myattachments/myhtml.html`]
+    })
+  }
+
+  openShare=()=>{
+    Share.share({
+      message: 'Can we share?',
+      url: 'https://reactjs.org',
+      title: 'We love React!'
+    }, {
+      // Android only:
+      dialogTitle: 'Share dialog title...',
+      // iOS only:
+      excludedActivityTypes: [
+        'com.apple.UIKit.activity.PostToTwitter'
+      ]
     })
   }
 
@@ -45,6 +60,13 @@ export default class App extends React.Component {
         >
           <Text>Send Email with Attachment</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={{backgroundColor: "blue", padding: 10, margin: 10}}
+          onPress={this.openShare}
+        >
+          <Text>Share</Text>
+        </TouchableOpacity>
+
       </View>
     );
   }
