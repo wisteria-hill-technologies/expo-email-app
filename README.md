@@ -7,7 +7,7 @@ This is a demo app to demonstrate my issue.
 Tested with Android device with Expo.
 
 ## Solution:
-Use FileSystem.cacheDirectory instead of FileSystem.documentDirectory
+Use FileSystem.cacheDirectory instead of FileSystem.documentDirectory (Please see the App.js)
 
 Please follow the discussion at expo forum below:
 https://forums.expo.io/t/mailcomposer-attachments-not-working-android/7771/10?u=nfabacus
